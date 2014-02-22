@@ -25,11 +25,11 @@ public class ScriptEngine {
 		this.mouseListeners = new ArrayList<MouseListener>();
 		this.mouseMotionListeners = new ArrayList<MouseMotionListener>();
 		this.messageListeners = new ArrayList<MessageListener>();
-		instances.put(Context.resolve(), this);
+		instances.put(Context.getInstance(), this);
 	}
 	
 	public static ScriptEngine getInstance() {
-		final ScriptEngine engine = instances.get(Context.resolve());
+		final ScriptEngine engine = instances.get(Context.getInstance());
 		if(engine != null) {
 			return engine;
 		}
@@ -81,7 +81,7 @@ public class ScriptEngine {
 		clearMouseMotionListeners();
 		clearMessageListeners();
 		if(script instanceof Paintable) {
-			Context.resolve().removePaintable((Paintable)script);
+			Context.getInstance().removePaintable((Paintable)script);
 		}
 		this.script = null;
 	}
@@ -100,7 +100,7 @@ public class ScriptEngine {
 			addMessageListener((MessageListener)script);
 		}
 		if(script instanceof Paintable) {
-			Context.resolve().addPaintable((Paintable)script); 
+			Context.getInstance().addPaintable((Paintable)script); 
 		}
 	}
 	

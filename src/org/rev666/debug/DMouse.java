@@ -15,9 +15,9 @@ public class DMouse extends AbstractDebugger {
 
 	@Override
 	public void paint(Graphics g) {
-		final StringBuilder stringBuilder = new StringBuilder();
+		//final StringBuilder stringBuilder = new StringBuilder();
 		//stringBuilder.append("Mouse Location: [").append(SuperCanvas.getMouseX()).append(", ").append(SuperCanvas.getMouseY()).append("]");
-		PaintDebugger.getInstance().addLine(stringBuilder.toString());
+		PaintDebugger.getInstance().addLine("hi");
 	}
 
 	@Override

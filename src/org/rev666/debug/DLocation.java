@@ -18,11 +18,11 @@ public class DLocation extends AbstractDebugger {
 
 	@Override
 	public void paint(Graphics g) {
-		Context.resolve().getPaintDebugger().addLine("Location: " + Players.getLocal().getLocation().toString());
-		Context.resolve().getPaintDebugger().addLine("Name: " + Players.getLocal().getName());
-		Context.resolve().getPaintDebugger().addLine("Animation: " + Players.getLocal().getAnimation());
-		Context.resolve().getPaintDebugger().addLine("Destination: " + Walking.getDestination().toString());
-		Context.resolve().getPaintDebugger().addLine("Walking: " + Walking.isMoving());
+		Context.getInstance().getPaintDebugger().addLine("Location: " + Players.getLocal().getLocation().toString());
+		Context.getInstance().getPaintDebugger().addLine("Name: " + Players.getLocal().getName());
+		Context.getInstance().getPaintDebugger().addLine("Animation: " + Players.getLocal().getAnimation());
+		Context.getInstance().getPaintDebugger().addLine("Destination: " + Walking.getDestination().toString());
+		Context.getInstance().getPaintDebugger().addLine("Walking: " + Walking.isMoving());
 		Players.getLocal().getLocation().draw(g, Color.red);
 	}
 

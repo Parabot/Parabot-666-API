@@ -2,6 +2,8 @@ package org.rev666;
 
 import java.applet.Applet;
 
+import org.parabot.core.paint.PaintDebugger;
+
 /**
  * 
  * @author Everel
@@ -10,11 +12,13 @@ import java.applet.Applet;
 public class LoaderApplet extends Applet {
 	private static final long serialVersionUID = -5804372016252617656L;
 	private Class<?> client;
+	public static PaintDebugger paintDebugger;
 
 	@Override
 	public void init() {
 		Stub stub = new Stub();
 		setStub(stub);
+		paintDebugger = PaintDebugger.getInstance();
 	}
 
 	public void provide(Class<?> clazz) {
@@ -30,8 +34,6 @@ public class LoaderApplet extends Applet {
 		try {
 			Object object = client.newInstance();
 			Applet applet = (Applet) object;
-			/*final Client client = (Client) object;
-			Context.resolve().setClientInstance(client);*/
 			applet.init();
 		} catch (Exception e) {
 			e.printStackTrace();

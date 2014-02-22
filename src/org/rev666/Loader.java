@@ -30,7 +30,7 @@ public class Loader extends ServerProvider {
 	@Override
 	public Applet fetchApplet() {
 		try {
-			final Context context = Context.resolve();
+			final Context context = Context.getInstance();
 			final ASMClassLoader classLoader = context.getASMClassLoader();
 			final Class<?> clientClass = classLoader.loadClass("client");
 			//MenuGen.newInstance(classLoader.loadClass("TG")); // TODO: get rid of hardcoded classname
@@ -82,7 +82,7 @@ public class Loader extends ServerProvider {
 	}
 
 	public static Client getClient() {
-		return (Client) Context.resolve().getClient();
+		return (Client) Context.getInstance().getClient();
 	}
 
 	@Override

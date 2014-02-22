@@ -35,7 +35,7 @@ public class Messages implements Opcodes {
 		inject.add(new VarInsnNode(ALOAD, 8));
 		inject.add(new MethodInsnNode(INVOKESTATIC, "org/rev666/callbacks/MessageListen", "messageReceived", "(ILjava/lang/String;ILjava/lang/String;Ljava/lang/String;ZLjava/lang/String;ILjava/lang/String;)V"));
 		
-		HashMap<String, String> constants = Context.resolve().getHookParser().getConstants();
+		HashMap<String, String> constants = Context.getInstance().getHookParser().getConstants();
 		
 		ClassNode classNode = ASMUtils.getClass(constants.get("MessageHookClass"));
 		for(final MethodNode methodNode : classNode.methods) {

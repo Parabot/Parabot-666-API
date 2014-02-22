@@ -21,7 +21,7 @@ import org.parabot.core.asm.ASMUtils;
 public class Packets implements Opcodes {
 
 	public static void injectIdGetter() {
-		HashMap<String, String> constants = Context.resolve().getHookParser().getConstants();
+		HashMap<String, String> constants = Context.getInstance().getHookParser().getConstants();
 		
 		ClassNode client = ASMUtils.getClass(constants.get("ClientClass"));
 		MethodNode mv = new MethodNode(ACC_PUBLIC, "getActionKey",

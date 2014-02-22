@@ -23,7 +23,7 @@ public class BotMenu {
 
 	public BotMenu(final JMenuBar bar) {
 		this.bar = bar;
-		this.paintDebugger = Context.resolve().getPaintDebugger();
+		this.paintDebugger = Context.getInstance().getPaintDebugger();
 		this.menuDebugItemListener = new ActionListener() {
 
 			@Override
