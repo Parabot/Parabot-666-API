@@ -2,9 +2,6 @@ package org.rev666;
 
 import java.applet.Applet;
 
-import org.parabot.core.Context;
-import org.rev666.accessors.Client;
-
 /**
  * 
  * @author Everel
@@ -33,8 +30,8 @@ public class LoaderApplet extends Applet {
 		try {
 			Object object = client.newInstance();
 			Applet applet = (Applet) object;
-			final Client client = (Client) object;
-			Context.resolve().setClientInstance(client);
+			/*final Client client = (Client) object;
+			Context.resolve().setClientInstance(client);*/
 			applet.init();
 		} catch (Exception e) {
 			e.printStackTrace();

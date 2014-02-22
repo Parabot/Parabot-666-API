@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 import org.parabot.core.paint.AbstractDebugger;
 import org.parabot.core.paint.PaintDebugger;
-import org.rev666.canvas.SuperCanvas;
 
 /**
  * 
@@ -17,7 +16,7 @@ public class DMouse extends AbstractDebugger {
 	@Override
 	public void paint(Graphics g) {
 		final StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("Mouse Location: [").append(SuperCanvas.getMouseX()).append(", ").append(SuperCanvas.getMouseY()).append("]");
+		//stringBuilder.append("Mouse Location: [").append(SuperCanvas.getMouseX()).append(", ").append(SuperCanvas.getMouseY()).append("]");
 		PaintDebugger.getInstance().addLine(stringBuilder.toString());
 	}
 

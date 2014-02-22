@@ -7,20 +7,16 @@ import java.net.URL;
 
 import javax.swing.JMenuBar;
 
-import org.objectweb.asm.tree.ClassNode;
 import org.parabot.core.Context;
 import org.parabot.core.asm.ASMClassLoader;
 import org.parabot.core.asm.adapters.AddInterfaceAdapter;
-import org.parabot.core.asm.wrappers.Super;
+import org.parabot.core.asm.hooks.HookFile;
 import org.parabot.environment.scripts.Script;
 import org.parabot.environment.servers.ServerManifest;
 import org.parabot.environment.servers.ServerProvider;
 import org.parabot.environment.servers.Type;
 import org.rev666.accessors.Client;
-import org.rev666.canvas.SuperCanvas;
 import org.rev666.debug.BotMenu;
-import org.rev666.inject.Messages;
-import org.rev666.inject.Packets;
 import org.rev666.script.ScriptEngine;
 
 /**
@@ -36,11 +32,13 @@ public class Loader extends ServerProvider {
 		try {
 			final Context context = Context.resolve();
 			final ASMClassLoader classLoader = context.getASMClassLoader();
-			final Class<?> clientClass = classLoader.loadClass("Loader");
+			final Class<?> clientClass = classLoader.loadClass("client");
 			//MenuGen.newInstance(classLoader.loadClass("TG")); // TODO: get rid of hardcoded classname
-			Applet loaderApp = (Applet) clientClass.newInstance();
-			loaderApp.init();
-			return loaderApp;
+			LoaderApplet applet = new LoaderApplet();
+			applet.provide(clientClass);
+			applet.init();
+			applet.load();
+			return applet;
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
@@ -49,18 +47,11 @@ public class Loader extends ServerProvider {
 
 	@Override
 	public void injectHooks() {
-
 		AddInterfaceAdapter.setAccessorPackage("org/rev666/accessors/");
-		Packets.injectIdGetter();
+		/*Packets.injectIdGetter();
 		Packets.injectInvoker();
 		Packets.injectDebug();
-		Messages.injectListener();
-		for (ClassNode node : Context.resolve().getClassPath().classes.values()) {
-			if (node.superName.toLowerCase().contains("canvas")) {
-				new Super(node.name, "org/rev666/canvas/SuperCanvas")
-						.inject();
-			}
-		}
+		Messages.injectListener();*/
 		super.injectHooks();
 
 	}
@@ -73,7 +64,7 @@ public class Loader extends ServerProvider {
 	@Override
 	public URL getJar() {
 		try {
-			return new File("666.jar").toURI().toURL();
+			return new File("C:/666.jar").toURI().toURL();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -81,16 +72,17 @@ public class Loader extends ServerProvider {
 	}
 
 	@Override
-	public URL getHooks() {
+	public HookFile getHookFile() {
 		try {
-			return new File("hooks.xml").toURI().toURL();
+			return new HookFile(new File("C:/666hooks.xml"), HookFile.TYPE_XML);
 		} catch (MalformedURLException e) {
+			System.err.println("Error occured while loading hook file");
 			throw new RuntimeException(e);
 		}
 	}
 
 	public static Client getClient() {
-		return (Client) SuperCanvas.context.getClient();
+		return (Client) Context.resolve().getClient();
 	}
 
 	@Override
